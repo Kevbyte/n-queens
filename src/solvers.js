@@ -15,40 +15,60 @@
 
 window.findNRooksSolution = function(n) {
   var solution = undefined;
-  var newBoard = new Board({n:n})
+  var newBoard = new Board({n:n});
 
   // How to do we check non-horiztontals & verticals
   // Start at one corner
-  // console.log(newBoard.rows())
-  var randomIndex = Math.floor(Math.random()*n);
 
-  newBoard.rows()[0][randomIndex] = 1;
+  var placeRooks = function(index, board) {
+    if (board[index].length === 1) {
+      newBoard.togglePiece(0,0);
+      return newBoard.rows();
+    } else { 
+      for (var i = 0; i < board[index].length; i++) {
+        var updatedBoard;
+        // If board doesnt have any conflicts with this row configuration then toggle 
+        newBoard.togglePiece(index, i);
 
-  for (var i = 0; i < newBoard.rows().length; i++) {
-    for (var j = 0; j < n - 1; j++) {
-
-      if (j !== i) {
-        if(!newBoard.hasAnyRooksConflicts()) {
-          newBoard.togglePiece(i, j);
-          // newBoard.rows()[i + 1][j] = 1;
-          //j = n;
-        } 
-      }  
+        if (newBoard.hasAnyRooksConflicts()) {
+          newBoard.togglePiece(index, i);
+        } else {
+            updatedBoard = newBoard.rows();
+            if (index < n - 1) {
+              placeRooks(index + 1, updatedBoard);
+            }
+            return newBoard.rows();
+        }
+      }
     }
-  }
-
+  };
   console.log(newBoard.rows())
-  // 
-  // console.log(solution)
-  console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
-  return newBoard.rows();
+  return placeRooks(0, newBoard.rows());
+
 };
 
 
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
-  var solutionCount = undefined; //fixme
+  var solutionCount = 0; //fixme
+  var board = new Board({n:n});
+
+  var searchBoard = function(startRow){
+    if(startRow === n){
+      solutionCount++;
+      return;
+    }
+    for(var i=0; i<n; i++){
+      board.togglePiece(startRow, i);
+      if(!board.hasAnyRooksConflicts()){
+        searchBoard(startRow+1);
+      }
+      board.togglePiece(startRow, i);  
+    }
+  }
+
+  searchBoard(0)
 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
