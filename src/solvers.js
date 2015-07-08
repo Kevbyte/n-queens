@@ -104,81 +104,10 @@ window.findNQueensSolution = function(n) {
       return board.rows();
     } else{
       var temp = searchBoard(0);
-      console.log(temp)
       return temp;
     }
-  
-  // console.log(solution)
-  // return solution;
 };
-  // var solution = undefined;
-  // var board = new Board({n:n});
-  // var err = false;
-
-  // var searchBoard = function(startRow, chessBoard){
-    
-
-  //   if(startRow === n){
-  //     solution = board.rows();
-  //     console.log(n);
-  //     console.log(solution)
-  //     return solution;
-  //   }
-  //   //recursive case
-  //   for(var i=0; i<n; i++){
-  //     board.togglePiece(startRow, i);
-  //     if(board.hasAnyQueensConflicts()){
-  //       // console.log(board.rows())
-  //       board.togglePiece(startRow, i); 
-  //     }else{
-  //       // console.log(board.rows())
-  //       err = false;
-  //       searchBoard(startRow+1, board.rows());
-  //     }
-  //     if (err) {
-  //       board.togglePiece(startRow, i);
-  //       err = false;
-  //     }
-  //   }
-  //   err = true;
-  //   return board.rows();
-
-  // }
-
-  // if (n === 0) {
-  //   return [];
-  // }
-  // if (n === 1) {
-  //   return [[1]];
-  // }else{
-  //   searchBoard(0, board.rows());
-  //   return solution;
-  // }
-  // var solution = undefined;
-  // var board = new Board({n:n});
-
-  //   var searchBoard = function(startRow){
-  //   if(startRow === n){
-  //     solution = board.rows();
-  //     console.log("solution")
-  //     console.log(board.rows())
-  //     return;
-  //   }
-  //   for(var i=0; i<n; i++){
-  //     board.togglePiece(startRow, i);
-  //     if(board.hasAnyQueensConflicts()){
-  //       board.togglePiece(startRow, i);
-  //     }else{
-  //       searchBoard(startRow+1);
-  //     } 
-
-  //     console.log("test")
-  //     console.log(board.rows())       
-  //   }
-  // }
-
-  // searchBoard(0);
-  // return solution;
+  
 
 
 
